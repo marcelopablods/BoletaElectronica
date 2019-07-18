@@ -1,0 +1,140 @@
+
+<div class="container no-margin">  
+  <div class="row">
+    <div class="col-10 offset-1">
+      <div class="row" >
+        <div class="col-md-4 offset-1" style="margin-top: 3%;">
+          <img src="{{rutaLogo}}" width="140%" height="110%"/> 
+        </div>
+        <div class="col-md-4 offset-2 text-center" style="border: 2px black solid; color: red; margin-top: 3%; border-radius: 4px;">
+            <label><b>Rut :</b> </label>{{rutEmisor}} 
+            <br>
+            <label>{{tipo}}</label>
+            <br>
+            <label><b> N° :</b></label> {{folioDte}}
+            <br />
+            <small >S.I.I. - SANTIAGO ORIENTE</small>
+            
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-10 offset-1" style="border: 1px black solid; margin-top:5%; border-radius: 4px;">
+          <div  class="row">
+            <div class="col-md-4" style="margin-top:1%;">
+              <label><b>Nombre:&nbsp;</b></label>{{nombreCliente}}
+            </div>
+            <div class="col-md-4" style="margin-top:1%;">
+              <label><b>Rut:&nbsp;</b></label>{{rutCliente}}
+            </div>
+            <div class="col-md-4" style="margin-top:1%;">
+              <label><b>Fecha Emisión:&nbsp;</b></label>{{fechaFact}}
+            </div>
+            <div class="col-md-4" >
+              <label><b>Fecha Vencimiento:&nbsp;</b></label>{{fechaVenc}}
+            </div>
+            <div class="col-md-4" >
+              <label><b>Direccion:&nbsp;</b> </label>{{direccion}}
+            </div>
+            <div class="col-md-4" >
+              <label><b>Comúna:&nbsp;</b> </label>{{comuna}}
+            </div>
+            <div class="col-md-4" >
+              <label><b>Ciudad:&nbsp;</b> </label>{{ciudad}}
+            </div>
+            <div class="col-md-4" >
+              <label><b>Giro:&nbsp;</b> </label>{{giro}}
+            </div>
+            <div class="col-md-4" >
+              <label><b>Vendedor:&nbsp;</b> </label>{{vendedor}}
+            </div>
+            <div class="col-md-4" >
+              <label><b>N° Operacion:&nbsp;</b> </label>{{noOperacion}}
+            </div>
+            <div class="col-md-4" >
+              <label><b>Observaciones:&nbsp;</b> </label>{{observacion}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+          
+      <div class="row">
+        <div class="col-md-10 offset-1" style="border: 1px black solid; margin-top: 1%; border-radius: 4px;">
+          <table class="table-striped table-hover table-responsive">
+            <thead>
+              <tr style="background-color: aliceblue">
+                <th style="width: 10%;">Cantidad</th>
+                <th style="width: 10%;">Descripcion</th>
+                <th style="width: 10%;">Valor Unitario</th>
+                <th style="width: 10%;">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let boleta of boletas">
+                <td style="width: 10%;"><span *ngIf="boleta.cantidad >0;then cantidadMayor else cantidadMenor"></span></td>
+                <ng-template #cantidadMayor>{{boleta.cantidad}}</ng-template>
+                <ng-template #cantidadMenor></ng-template>
+                <td style="width: 10%;">{{boleta.glosa}}</td>
+                <td style="width: 10%;"><span *ngIf="boleta.precioUnitario >0;then precioUnitarioMayor else precioUnitarioMenor"></span></td>
+                <ng-template #precioUnitarioMayor>{{boleta.precioUnitario}}</ng-template>
+                <ng-template #precioUnitarioMenor></ng-template>
+                <td style="width: 10%;"><span *ngIf="boleta.monto >0;then montoMayor else montoMenor"></span></td>
+                <ng-template #montoMayor>{{boleta.monto}}</ng-template>
+                <ng-template #montoMenor></ng-template>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+                  
+      <div class="row">
+        <div class="col-10 offset-1" style="margin-top:1%;border:1px black solid; border-radius: 4px;">
+          <div class="row">
+            <div class="col-3">
+              
+                <span *ngIf="tipo =='BOLETA ELECTRÓNICA'"></span>
+                <span *ngIf="tipo =='BOLETA EXENTA'"></span>
+                <span *ngIf="tipo =='FACTURA ELECTRÓNICA'"><b>Exento :</b> {{montoexento}}</span>
+                <span *ngIf="tipo =='FACTURA EXENTA'"><b>Exento :</b> {{montoexento}}</span>
+            
+          </div>
+          <div class="col-3">
+
+                <span *ngIf="tipo =='BOLETA ELECTRÓNICA'"></span>
+                <span *ngIf="tipo =='BOLETA EXENTA'"></span>
+                <span *ngIf="tipo =='FACTURA ELECTRÓNICA'"><b>Neto :</b> {{montoNeto}}</span>
+                <span *ngIf="tipo =='FACTURA EXENTA'"><b>Neto :</b> {{montoNeto}}</span>
+
+          </div>
+          <div class="col-3">
+
+                <span *ngIf="tipo =='BOLETA ELECTRÓNICA'"></span>
+                <span *ngIf="tipo =='BOLETA EXENTA'"></span>
+                <span *ngIf="tipo =='FACTURA ELECTRÓNICA'"><b>I.V.A(19%) :</b> {{montoIva}}</span>
+                <span *ngIf="tipo =='FACTURA EXENTA'"><b>I.V.A(19%) :</b> {{montoIva}}</span>
+
+          </div>
+            <div class="col-3"><b>Total :</b> {{montoTotal}}</div>
+          </div>
+        </div>
+      </div>
+
+       
+    </div>  
+  </div>       
+</div>
+<div class="row">
+  <div class="col-12 text-center" style="margin-top:1%;">
+    <div class="barcode" id="contenido">
+      <pdf417barcode [text]="pruebaBarra"></pdf417barcode>
+    </div>
+  </div>
+</div>  
+<div style="margin: 0 auto;text-align:center;">
+  <label><b>EXPORTAR A PDF</b></label>
+  <button (click)="descargarPdf2()" style="margin:0 auto;width: 30%;" class="btn btn-outline-danger btn-block"><i class="fas fa-file-pdf"></i></button>
+</div>
+
+<!--CANVAS QUE SE UTILIZA PARA AGREGAR LA IMAGEN AL PDF-->
+<canvas id="testCanvas" width="700" [hidden]=true  style="border: red solid 1px"> </canvas>
+    

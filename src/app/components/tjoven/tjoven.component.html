@@ -1,0 +1,57 @@
+
+<div class="row" style="margin-top:3%;">
+  <div class="col-md-4 offset-md-4 col-sm-12">
+    <!-- HEADER-->
+    <div class="row">
+      <div class="col-md-12">
+          <img src="assets/img/logoTurismoJoven.jpg" width="100%" height="90%">  
+      </div>
+    </div>
+
+    <!--SECTION-->
+    <form #declarativeForm="ngForm">
+      <div class="row" >
+        <div id="sectionTuristour" class="col-md-12">
+          <div class="form-group">
+            <label for="cbTipo">Tipo Documento</label>
+            <div class="selecContainer">
+              <select id="cbTipo" name="txtTipoDocumento" class="form-control" [(ngModel)]="txtTipoDocumento">
+                <option *ngFor="let boleta of tipoboletas" [ngValue]="boleta.id" >
+                  {{ boleta.name }}
+                </option>
+              </select>
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="txtFolio">Nº Folio</label>
+            <input type="number" class="form-control" id="txtIdFolio" [(ngModel)]="txtFolio" name="txtFolio" placeholder="Ingrese numero de folio" (keydown)="evaluarBtn()">
+          </div>
+          <div class="form-group">
+            <label for="txtFecha">Fecha</label>
+            <input type="date" class="form-control" id="txtIdFolio" [(ngModel)]="txtFecha" name="txtFecha" placeholder="Ingrese la fecha" (keydown)="evaluarBtn()">
+          </div>
+          <div class="form-group">
+            <label for="txtMonto">Monto</label>
+            <input type="number" class="form-control" id="txtIdFolio" [(ngModel)]="txtMonto" name="txtMonto" placeholder="Ingrese un monto" (keydown)="evaluarBtn()">
+          </div>
+          <div class="form-group">
+              <re-captcha (resolved)="resolved($event)" [(ngModel)]="declarativeFormCaptchaValue" name="captcha"></re-captcha>
+          </div>
+          <div class="form-group ">
+              <b class="form-control" *ngIf="actionMsj"><small style="color:red">{{txtRespuesta}}</small></b>
+          </div>
+          <button class="btn btn-outline-primary mt-2" [disabled]="actionBtn"  (click)="getBoleta(); evaluarBtn()">Descargar</button>
+          <input type="button" value="Descargar" class="btn btn-outline-primary mt-2" [disabled]="actionBtn"  (click)="getBoleta(); evaluarBtn()">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!--CANVAS QUE SE UTILIZA PARA AGREGAR LA IMAGEN AL PDF-->
+<canvas id="testCanvas" width="700" [hidden]=true  style="border: red solid 1px"> </canvas>
+
+    <div class="barcode" id="contenido" style="display:none;">
+      <pdf417barcode [text]="pruebaBarra"></pdf417barcode>
+    </div>
+
+

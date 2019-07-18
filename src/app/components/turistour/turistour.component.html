@@ -1,0 +1,49 @@
+
+<div class="row" style="margin-top:3%;">
+  <div class="col-4 offset-4">
+    <!-- HEADER-->
+    <div class="row">
+      <div class="col-12">
+          <!--<img src="../../../assets/img/logoTuristour.png" width="100%" height="90%">-->
+          <img src="assets/img/logoTuristour.png" width="100%" height="90%">    
+      </div>
+    </div>
+
+    <!--SECTION-->
+    <form #declarativeForm="ngForm">
+      <div class="row" >
+        <div id="sectionTuristour" class="col-12">
+          <div class="form-group">
+            <label for="cbTipo">Tipo Documento</label>
+            <div class="selecContainer">
+              <select id="cbTipo" name="txtTipoDocumento" class="form-control" [(ngModel)]="txtTipoDocumento">
+                <option *ngFor="let boleta of boletas" [ngValue]="boleta.id" >
+                  {{ boleta.name }}
+                </option>
+              </select>
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="txtFolio">Nº Folio</label>
+            <input type="number" class="form-control" id="txtIdFolio" [(ngModel)]="txtFolio" name="txtFolio" placeholder="Ingrese numero de folio" (keydown)="evaluarBtn()">
+          </div>
+          <div class="form-group">
+            <label for="txtFecha">Fecha</label>
+            <input type="date" class="form-control" id="txtIdFolio" [(ngModel)]="txtFecha" name="txtFecha" placeholder="Ingrese la fecha" (keydown)="evaluarBtn()">
+          </div>
+          <div class="form-group">
+            <label for="txtMonto">Monto</label>
+            <input type="number" class="form-control" id="txtIdFolio" [(ngModel)]="txtMonto" name="txtMonto" placeholder="Ingrese un monto" (keydown)="evaluarBtn()">
+          </div>
+          <div>
+              <re-captcha (resolved)="resolved($event)" [(ngModel)]="declarativeFormCaptchaValue" name="captcha"></re-captcha>
+              </div><br>
+              <b *ngIf="actionMsj"><h5 style="color:red">!Datos incorrectos¡</h5></b>
+          <button type="submit" class="btn btn-outline-primary" [disabled]="actionBtn"  (click)="getBoleta(); evaluarBtn()">Consultar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
